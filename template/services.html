@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PinPoint</title>
+    <link rel="stylesheet" href="../lib/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/index.css">
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.css' type='text/css' />
+
+    <style>
+        #hoverableForm{
+            background-color: rgba(238, 238, 238, 0.53);
+            border-radius: 5px 5px 5px;
+            font-family:  RobotoMono-Light, "DejaVu Sans Light", SansSerif, serif !important;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-light">
+    <a class="navbar-brand text-dark ml-3" href="#">
+        <img src="../media/pin.png" class=" logo-img" alt=""> <span>PinPoint</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mx-auto mt-2 mt-lg-0 float-right">
+            <li class="nav-item mx-4">
+                <a class="nav-link text-dark" href="index.html">Home</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Services
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item text-dark" href="tabular-services.html">Tabular</a>
+                    <a class="dropdown-item text-dark" href="services.html">Maps</a>
+                </div>
+            </li>
+
+
+            <li class="nav-item mx-4">
+                <a class="nav-link text-dark" href="report.html">Report</a>
+            </li>
+
+        </ul>
+        <span class="nav-item">
+            <a href="#" class="nav-link" data-toggle="modal" data-target="#sideModalTR">
+                <i class="fa fa-bell-o text-dark"></i>
+            </a>
+        </span>
+
+        <form class="form-inline my-2 my-lg-0 nav-item">
+            <a href="login.html" class="nav-link">
+                <i class="fa fa-power-off text-dark"></i>
+            </a>
+        </form>
+    </div>
+</nav>
+
+<div class="row w-100">
+
+    <div class="card ml-5  mt-3 col-8 ">
+        <div class="card-img-top m-0 mx-0" id="map" style="height:30rem;"></div>
+        <div class="card-body">
+            <h4 class="h4 d-block mx-auto">PinPoint places</h4>
+        </div>
+    </div>
+
+<div class="col-3 mt-3 ml-5" id="hoverableForm" >
+    <h3 class="my-5 mx-auto d-block">Provide PinPoint</h3>
+    <form >
+        <div class="form-group ">
+            <label for="locationName">Location Name</label>
+            <input type="text" class="form-control" id="locationName" placeholder="Enter location name">
+        </div>
+        <div class="form-group ">
+            <label for="locationDescription">Add Description</label>
+            <input type="text" class="form-control" id="locationDescription" placeholder="Enter location name">
+        </div>
+        <div class="form-group">
+                <label for="inputState">Type</label>
+                <select id="inputState" class="form-control">
+                    <option selected>Choose...</option>
+                    <option>Food</option>
+                    <option>Hospital</option>
+                    <option>ATMs</option>
+                    <option>Bank</option>
+                    <option>Hotel</option>
+                    <option>Supermarket</option>
+                </select>
+        </div>
+
+        <div class="form-group ">
+            <label for="locationGeo">GeoLocation</label>
+            <input type="text" class="form-control" id="locationGeo" placeholder="Select Location On Map" disabled>
+            <input id="latitude" type="hidden">
+            <input id="longitude" type="hidden">
+        </div>
+        <button type="submit" id="submit" class="btn btn-info mt-4 mx-auto d-block">Submit</button>
+    </form>
+
+
+</div>
+
+</div>
+<script src="../lib/jquery-3.4.1.js"></script>
+<script src="../js/LoadMap.js"></script>
+<script>
+    $(document).ready(async  function() {
+        await loadMap();
+    })
+</script>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+
+<script>
+    let loc = {
+        lngLat: {
+            lng:0,
+            lat:0
+        }
+    };
+    let center = {
+        lng:'38.7578',
+        lat:'8.9806'
+    };
+
+
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic2VnbmkiLCJhIjoiY2pyM2N5a2Z2MHRjZDQ4cW14a3NhMzkxdSJ9.YfPekPetxFfh-eWsouEEEQ';
+    let map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        center: [parseFloat(center.lng), parseFloat(center.lat)],
+        zoom: 3
+    });
+
+    $(document).ready( async function () {
+
+        console.log(array);
+        console.log(array[0]);
+        for (var i = 0; i < array.length; i++ ){
+            console.log(array[i]);
+        }
+        map.addControl(new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken
+        }));
+
+        map.on('load', () => {
+
+            map.addSource('pointSource', {
+                type: 'geojson',
+                data: {
+                    "type": "FeatureCollection",
+                    "features": array
+                }
+            });
+
+            map.addLayer({
+                id: 'points-location',
+                source: 'pointSource',
+                type: 'circle',
+                'paint': {
+                    'circle-radius': 20,
+                    'circle-opacity': 0.5,
+                    // https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+                    'circle-color': [
+                        'match',
+                        ['get', 'Type'],
+                        0, '#00ff21',
+                        1, '#e07021',
+                        2, '#ee4343',
+                        /* other */
+                        '#ee4343'
+                    ]
+                }
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        getLocation();
+    });
+
+    // map.on('click', addMarker);
+    map.on('click', function (e) {
+        $('#locationGeo').val(e.lngLat.lat + "  " + e.lngLat.lng);
+        addMarker(e);
+    });
+
+    function addMarker(e) {
+        console.log(e);
+        try {
+            map.removeLayer("circles");
+            map.removeSource("markers");
+
+        }
+        catch (err) {
+
+        }
+        finally {
+            map.addSource('markers', {
+                "type": "geojson",
+                "data": {
+                    "type": "FeatureCollection",
+                    "features": [{
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [e.lngLat.lng, e.lngLat.lat]
+                        },
+                        "properties": {
+                            "modelId": 2,
+                        },
+                    }]
+                }
+            });
+
+            map.addLayer({
+                "id": "circles",
+                "source": "markers",
+                "type": "circle",
+                "paint": {
+                    "circle-radius": 20,
+                    "circle-opacity": 0,
+                    "circle-stroke-width": 1,
+                    "circle-stroke-color": "#ee4343",
+                    "circle-stroke-opacity": 1,
+                },
+                "filter": ["==", "modelId", 2],
+            });
+
+            $("#latitude").val(e.lngLat.lat);
+            $("#longitude").val(e.lngLat.lng);
+        }
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            return navigator.geolocation.getCurrentPosition(setLocation);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function setLocation(position) {
+        console.log(position);
+        $(".latitude").val(position.coords.latitude);
+        $(".longitude").val(position.coords.longitude);
+    }
+
+
+
+    //// post
+    $('#submit').click(function (e) {
+        e.preventDefault();
+        let name = $('#locationName').val();
+        let description = $('#locationDescription').val();
+        let type = $('#inputState').val();
+        let latitude = $('#latitude').val();
+        let longitude = $('#longitude').val();
+
+        let service = {
+            name,
+            description,
+            type,
+            latitude,
+            longitude
+        };
+        console.log(service);
+        $.ajax({
+            url: "http://10.6.222.41:8080/api/facility/add",
+            type: 'POST',
+            data: JSON.stringify(service),
+            dataType: 'json', // added data type
+            success: function (res) {
+                console.log(res)
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

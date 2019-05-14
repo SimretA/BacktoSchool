@@ -1,0 +1,16 @@
+@font-face {
+    font-family: Raleway-Light;
+    src: url("../lib/fonts/Raleway/Raleway-Light.ttf");
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: Raleway-Regular;
+    src: url("../lib/fonts/Raleway/Raleway-Regular.ttf");
+}
+
+.card .card-body h5{
+    font-family: Raleway-Light, "DejaVu Sans Light", SansSerif, serif !important;
+
+}
+

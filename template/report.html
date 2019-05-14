@@ -2,9 +2,129 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Report</title>
+    <link rel="stylesheet" href="../lib/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/report.css">
+    <link rel="stylesheet" href="../lib/MDB-Free_4.8.0/css/mdb.css">
+    <link rel="stylesheet" href="../css/loader.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg bg-light">
+    <a class="navbar-brand text-dark ml-3" href="#">
+        <img src="../media/pin.png" class=" logo-img" alt=""> <span>PinPoint</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mx-auto mt-2 mt-lg-0 float-right">
+            <li class="nav-item mx-4">
+                <a class="nav-link text-dark" href="index.html">Home</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Services
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item text-dark" href="tabular-services.html">Tabular</a>
+                    <a class="dropdown-item text-dark" href="services.html">Maps</a>
+                </div>
+            </li>
+
+
+            <li class="nav-item mx-4">
+                <a class="nav-link text-dark" href="report.html">Report</a>
+            </li>
+
+        </ul>
+        <span class="nav-item">
+            <a href="#" class="nav-link" data-toggle="modal" data-target="#sideModalTR">
+                <i class="fa fa-bell-o text-dark"></i>
+            </a>
+        </span>
+
+        <form class="form-inline my-2 my-lg-0 nav-item">
+            <a href="login.html" class="nav-link">
+                <i class="fa fa-power-off text-dark"></i>
+            </a>
+        </form>
+    </div>
+</nav>
+
+<div class="container-fluid" style="padding-top: 70px;">
+    <butto id="downloadPdf" class="float-right btn btn-amber" onclick="downloadPdf(event)">Export</butto>
+    <div class="row pt-5" id="reportPage">
+
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Categories vs Views</h5>
+                    <div id="removableLoaderRow1" role="row" class="even">
+                            <div class="lds-ellipsis mx-auto d-block">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                    </div>
+                    <!--<img class="card-img-top" src="../media/black-blur.jpg" alt="Card image cap">-->
+                    <canvas id="myChart" class="card-img-top" ></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Categories vs Facilities</h5>
+                    <div id="removableLoaderRow2" role="row" class="even">
+                        <div class="lds-ellipsis mx-auto d-block">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <!--<img class="card-img-top" src="../media/black-blur.jpg" alt="Card image cap">-->
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table id="example" class="table table-striped table-bordered table-borderless m-5" style="width:100%">
+        <thead>
+        <tr>
+            <th>Facilities</th>
+            <th>Count</th>
+            <th>Views</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="removableLoaderRow3" role="row" class="even">
+            <td colspan="4">
+                <div class="lds-ellipsis mx-auto d-block">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+</div>
+
+<script src="../lib/jquery-3.4.1.js"></script>
+<script src="../lib/popper.min.js"></script>
+<script src="../lib/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+<script src="../lib/MDB-Free_4.8.0/js/mdb.min.js"> </script>
+<script src="../js/report.js"></script>
 </body>
 </html>

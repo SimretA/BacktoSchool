@@ -1,0 +1,23 @@
+@font-face {
+    font-family: Raleway-Light;
+    src: url("../lib/fonts/Raleway/Raleway-Light.ttf");
+    font-weight: 800;
+}
+
+
+@font-face {
+    font-family: RobotoMono-Light;
+    src: url("../lib/fonts/Roboto_Mono/RobotoMono-Light.ttf");
+    font-weight: 800;
+}
+
+
+h1, h4 {
+    font-family: Raleway-Light, SansSerif, Serif;
+    text-transform: uppercase;
+}
+
+nav a span {
+    font-family: RobotoMono-Light;
+    text-transform: none;
+}

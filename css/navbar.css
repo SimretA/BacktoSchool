@@ -1,0 +1,35 @@
+@font-face {
+    font-family: Raleway-Light;
+    src: url("../lib/fonts/Raleway/Raleway-Light.ttf");
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: Raleway-Regular;
+    src: url("../lib/fonts/Raleway/Raleway-Regular.ttf");
+}
+@font-face {
+    font-family: Nunito-Light;
+    src: url("../lib/fonts/Nunito/Nunito-Light.ttf");
+}
+
+@font-face {
+    font-family: Nunito-Regular;
+    src: url("../lib/fonts/Nunito/Nunito-Regular.ttf");
+}
+
+nav a {
+    font-family: Nunito-Regular, "DejaVu Sans Light", SansSerif, serif !important;
+    text-transform: uppercase;
+    color: #d97645 !important;
+}
+
+.logo-img {
+    width: 2rem;
+
+}
+
+.dropdown:hover>.dropdown-menu {
+    display: block;
+    color: #000;
+}

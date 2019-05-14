@@ -2,50 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>PinPoint</title>
     <link rel="stylesheet" href="../lib/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/index.css">
 
+    <style>
+        body {
+            background-color: #dddeeb;
+        }
+        .section-left {
+            width: 30rem;
+        }
+        .compass {
+            background: url("../media/honey-yanibel-minaya-cruz-576182-unsplash.jpg");
+            background-size: cover;
+            width: 100%;
+            height: 38rem;
+        }
+        p {
+            font-size: 3em;
+            font-family: RobotoMono-Light, "DejaVu Sans Light", SansSerif, serif;
+        }
+    </style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg bg-light">
-    <a class="navbar-brand" href="#">Biftu Barii</a>
+    <a class="navbar-brand text-dark ml-3" href="#">
+        <img src="../media/pin.png" class=" logo-img" alt=""> <span>PinPoint</span>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">HOME</a>
+        <ul class="navbar-nav mx-auto mt-2 mt-lg-0 float-right">
+            <li class="nav-item mx-4">
+                <a class="nav-link text-dark" href="index.html">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="bedrooms.html">Siree</a>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Services
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item text-dark" href="tabular-services.html">Tabular</a>
+                    <a class="dropdown-item text-dark" href="services.html">Maps</a>
+                </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="shops.html">Suuqii</a>
+
+
+            <li class="nav-item mx-4">
+                <a class="nav-link text-dark" href="report.html">Report</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="payment.html">Kaffaltii</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="report.html">Gabaasa</a>
-            </li>
+
         </ul>
         <span class="nav-item">
             <a href="#" class="nav-link" data-toggle="modal" data-target="#sideModalTR">
-                <i class="fa fa-bell-o"></i>
+                <i class="fa fa-bell-o text-dark"></i>
             </a>
         </span>
 
         <form class="form-inline my-2 my-lg-0 nav-item">
             <a href="login.html" class="nav-link">
-                <i class="fa fa-power-off"></i>
+                <i class="fa fa-power-off text-dark"></i>
             </a>
         </form>
     </div>
 </nav>
 
+<section class="mt-5 float-left section-left">
+    <!--<h1 class="ml-5">admin panel</h1>-->
+    <!--<a href="" class="text-decoration-none"><h4 class="ml-5">add facility</h4></a>-->
+    <!--<a href="" class="text-decoration-none"><h4 class="ml-5">generate reports</h4></a>-->
+    <p class="mx-4">Help others to reach their dream place</p>
+</section>
+
+<section class="w-25 mx-auto compass">
+</section>
 
 </body>
 </html>
